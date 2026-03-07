@@ -1,0 +1,51 @@
+% --------------------------------------------
+% CHAPTER 3: METHODS
+% --------------------------------------------
+\setlength{\parindent}{0.5in}
+
+\chapter{Computational Methods}
+How were the results produced? This demonstrates an understanding of the tools used and why each tool was used. What results were gotten from each?
+
+VASP, PHONOPY, AI-MD (ab initio molecular dynamics), DFTB, LAMMPS, MOOSE, etc etc. How to mention these codes and their relevance in an organized manner? Is it necessary to discuss all of them here? Where do I mention the difference between discrete and probabilistic methods? Do I discuss mathematical methods here?
+
+Some kind of figure to demonstrate the codes used could be useful here.
+
+Good idea to recommend other sources for further reading, since I'll only cover the broad strokes here. 
+
+This is a computational work, with some emphasis on math theory and derivation and physics. I might rename this to just methods, and have the math be in here too, if that is reasonable.
+
+\section{Density Functional Theory}
+https://vasp.at/wiki/Category:Theory
+Covering the main concepts that are required to understand my results and where my data comes from.
+\autocite{kresseEfficiencyAbinitioTotal1996} (VASP source with explanation of their tools and methods- use for explaining theory)
+
+Hohenberg-Kohn-Sham density functional theory yields a formula for the ground state as a function of the electronic density $\rho(\boldsymbol{r})$:
+\begin{equation}\label{HKS-functional}
+    F = \sum_n f_n \epsilon_n - E_H[\rho(\boldsymbol{r})] + E_{xc}[\rho(\boldsymbol{r})] - \int V_{xc}(\boldsymbol{r}) \rho(\boldsymbol{r}) d\boldsymbol{r} - \sum_n \sigma S \left(\frac{\epsilon_n-\mu}{\sigma}\right)
+\end{equation}
+Where the electronic density for n electrons in the system is given as:
+\begin{equation}\label{HKS-electron-density}
+    \rho (\boldsymbol{r})=\sum_n \boldsymbol{f}_n |\psi_n(\boldsymbol{r})|^2
+\end{equation}
+\autocite{kresseEfficiencyAbinitioTotal1996}
+% FROM VASP ELECTRONIC MINIMIZATION SITE https://www.vasp.at/wiki/Category:Electronic_minimization
+
+
+\subsection {Hubbard U}
+Here is where all my work on the hubbard U parameter gets to shine.
+
+\autocite{anisimovBandTheoryMott1991} 'First' Hubbard U paper - proposes the theory
+
+\autocite{teschHubbardParametersTransition2022} Hubbard from first principles paper
+
+\subsection {Phonon Calculations}
+The tools Phonopy and Phono3py \autocite{togoFirstprinciplesPhononCalculations2023} were essential for computing the phonon vibrational modes for this study. This is a separate software that interfaces with VASP and DFTB+ to provide a comprehensive toolkit for simulating phonons. 
+
+
+\section{Density Functional Tight Binding}
+DFTB-SCC, xTB, how do I use extended tight binding, and the concepts behind it.
+
+\section{Statistical Analysis}
+This either goes here or in results and discussion, but I want to make a clear mention of my methods for error estimation, statistical analysis, and  benchmarking
+
+\clearpage

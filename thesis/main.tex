@@ -1,0 +1,291 @@
+\documentclass[12pt,letterpaper]{report}
+
+% University of Wyoming Thesis
+% Follows UW Thesis and Dissertation Guide (Spring 2020)
+
+% ============================================
+% REQUIRED PACKAGES
+% ============================================
+
+% Font and encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times} % Times New Roman font
+
+% Page layout and margins
+\usepackage[letterpaper, margin=1in]{geometry}
+
+% Line spacing
+\usepackage{setspace}
+
+% Graphics and figures
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[format=plain,labelfont=bf,textfont=it]{caption}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{longtable}
+
+% Mathematics
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+
+% Bibliography
+\usepackage[backend=bibtex,style=ieee]{biblatex} % use \autocite for this
+\addbibresource{jensenalison-thesis.bib}
+
+% Hyperlinks (load last)
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=false,
+    pdftitle={Thesis},
+    }
+    
+\urlstyle{same} % don't use monospace font for urls
+
+% Table of contents formatting
+\usepackage{tocloft}
+
+% Headers and footers
+\usepackage{fancyhdr}
+
+% Appendix
+\usepackage[titletoc]{appendix}
+
+% Glossary (terms, acronyms, etc)
+\usepackage[toc]{glossaries}
+\makeglossaries
+\input{glossary} % all declarations of terms and acronyms located here
+
+% Chapter Title Format
+\usepackage{titlesec}
+
+% ============================================
+% PAGE NUMBERING AND FORMATTING SETUP
+% ============================================
+
+% Set page numbering to bottom center
+\pagestyle{fancy}
+\fancyhf{} % Clear all headers and footers
+\renewcommand{\headrulewidth}{0pt} % Remove header line
+\fancyfoot[C]{\thepage} % Page number at bottom center
+
+% Also apply to chapter pages
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyfoot[C]{\thepage}
+}
+
+% Center all chapter titles (numbered and unnumbered)
+\titleformat{\chapter}[display]
+  {\normalfont\large\bfseries\centering}
+  {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+  
+\titleformat{name=\chapter,numberless}[display]
+  {\normalfont\large\bfseries\centering}
+  {}{0pt}{\Huge}
+
+% Let preliminary sections show up in toc
+\newcommand{\prelimsection}[1]{
+    \chapter*{#1}
+    \addcontentsline{toc}{chapter}{#1}
+}
+
+% Double spacing for main text
+\doublespacing
+
+% No full justification (ragged right)
+\raggedright
+
+%============================================
+% CUSTOM COMMANDS FOR THESIS INFO
+% ============================================
+
+\newcommand{\thesistitle}{[THESIS TITLE]}
+\newcommand{\authorname}{Alison A. Jensen}
+\newcommand{\degreename}{M.S.}
+\newcommand{\majorfield}{Mechanical Engineering}
+\newcommand{\departmentname}{Department of Mechanical Engineering}
+\newcommand{\graduationmonth}{May}
+\newcommand{\graduationyear}{2026}
+\newcommand{\defensedate}{[DEFENSE DATE]}
+
+% ============================================
+% ============================================
+
+\begin{document}
+
+% ============================================
+% PRELIMINARY PAGES (Roman numerals)
+% ============================================
+
+\pagenumbering{roman}
+
+% --------------------------------------------
+% COMMITTEE PAGE (no page number shown)
+% --------------------------------------------
+
+\include{preliminary-pages/committee-page}
+
+% --------------------------------------------
+% ABSTRACT (separate page numbering)
+% --------------------------------------------
+
+
+\include{preliminary-pages/abstract}
+
+% Reset to Roman numerals for remaining preliminary pages
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+% --------------------------------------------
+% TITLE PAGE (page i, but number not shown)
+% --------------------------------------------
+
+\include{preliminary-pages/title-page}
+
+\setcounter{page}{2}
+
+% --------------------------------------------
+% COPYRIGHT PAGE (optional - page ii)
+% --------------------------------------------
+
+\include{preliminary-pages/copyright-page}
+
+% --------------------------------------------
+% DEDICATION PAGE (optional - page iii)
+% --------------------------------------------
+
+\include{preliminary-pages/dedication}
+
+% --------------------------------------------
+% ACKNOWLEDGMENTS (page iv)
+% --------------------------------------------
+
+\include{preliminary-pages/acknowledgements}
+
+% -------------------------------------------\textit{}-
+% TABLE OF CONTENTS (page v)
+% --------------------------------------------
+
+\thispagestyle{plain}
+
+\renewcommand{\contentsname}{\hfill Table of Contents \hfill}
+\tableofcontents
+
+\clearpage
+
+% --------------------------------------------
+% LIST OF FIGURES (page vi)
+% --------------------------------------------
+
+\thispagestyle{plain}
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{\listfigurename}
+\begin{center}
+
+\listoffigures
+    
+\end{center}
+
+\clearpage
+
+% --------------------------------------------
+% LIST OF TABLES (page vii)
+% --------------------------------------------
+
+\thispagestyle{plain}
+
+\addcontentsline{toc}{chapter}{\listtablename}
+\begin{center}
+
+\listoftables
+    
+\end{center}
+
+\clearpage
+
+% ============================================
+% MAIN TEXT (Arabic numerals starting at 1)
+% ============================================
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% ALL of the text in this thesis is in the respective .tex documents. This will make writing easier, not having to mess with the main.tex while writing. -Ali
+\include{1-introduction}
+\include{2-background}
+\include{3-methods}
+\include{4-literature}
+\include{5-results}
+\include{6-conclusions}
+
+% --------------------------------------------
+% SUPPLEMENTAL MATERIAL
+% --------------------------------------------
+
+\chapter{Supplemental Material}
+
+This section contains the complete results of the experiments conducted.
+Utilize sections to organize the supplemental content and reduce clutter in the main chapters.
+
+\section{CeO2 Parameterization}
+
+For example, the results from work on CeO2 parameterization.
+
+\clearpage
+
+% ============================================
+% APPENDICES
+% ============================================
+
+% Single spacing for appendices
+\singlespacing
+
+\begin{appendices}
+ 
+\chapter{Additional Information on a relevant topic}
+
+The additional information section provides further details, such as theory that was too long for the main text. This is to expand the reader's understanding without disrupting the flow of the main chapters.
+
+\clearpage
+
+\chapter{Even more information on another topic}
+
+Another appendix for more information.
+
+\end{appendices}
+
+\clearpage
+
+% ============================================
+% Glossary
+% ============================================
+
+\printglossary[title={Glossary}, toctitle={Glossary},nonumberlist]
+
+% need to add a symbols list for variables and math ******
+
+\clearpage
+
+% ============================================
+% REFERENCES/BIBLIOGRAPHY
+% ============================================
+
+% Single spacing for bibliography
+\singlespacing 
+
+\addcontentsline{toc}{chapter}{References}
+\renewcommand{\bibname}{References}
+\printbibliography
+
+\clearpage
+
+\end{document}
