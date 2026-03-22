@@ -51,6 +51,9 @@
 % Table of contents formatting
 \usepackage{tocloft}
 
+% Include indent after headers
+\usepackage{indentfirst}
+
 % Headers and footers
 \usepackage{fancyhdr}
 
@@ -58,9 +61,13 @@
 \usepackage[titletoc]{appendix}
 
 % Glossary (terms, acronyms, etc)
-\usepackage[toc]{glossaries}
+\usepackage[toc, acronym, symbols]{glossaries}
+
+% Creates two separate lists:
+% \printglossary[type=\acronymtype] % acronyms only
+% \printglossary[type=symbols]      % math symbols only  
 \makeglossaries
-\input{glossary} % all declarations of terms and acronyms located here
+\input{glossary}
 
 % Chapter Title Format
 \usepackage{titlesec}
@@ -85,7 +92,7 @@
 % Center all chapter titles (numbered and unnumbered)
 \titleformat{\chapter}[display]
   {\normalfont\large\bfseries\centering}
-  {\chaptertitlename\ \thechapter}{20pt}{\Huge}
+  {\chaptertitlename\ \thechapter}{10pt}{\Huge}
   
 \titleformat{name=\chapter,numberless}[display]
   {\normalfont\large\bfseries\centering}
@@ -97,6 +104,9 @@
     \addcontentsline{toc}{chapter}{#1}
 }
 
+% Paragraph indents (tab) should be 1.5*fontsize, so 16pt for 12pt font (this is standard)
+\setlength{\parindent}{1.5em}
+
 % Double spacing for main text
 \doublespacing
 
@@ -107,14 +117,14 @@
 % CUSTOM COMMANDS FOR THESIS INFO
 % ============================================
 
-\newcommand{\thesistitle}{[THESIS TITLE]}
+\newcommand{\thesistitle}{An Atomistic Computational Investigation of the Thermal Properties of Selected Nuclear Materials}
 \newcommand{\authorname}{Alison A. Jensen}
 \newcommand{\degreename}{M.S.}
 \newcommand{\majorfield}{Mechanical Engineering}
 \newcommand{\departmentname}{Department of Mechanical Engineering}
 \newcommand{\graduationmonth}{May}
 \newcommand{\graduationyear}{2026}
-\newcommand{\defensedate}{[DEFENSE DATE]}
+\newcommand{\defensedate}{[DEFENSE DATE: ?24 April? 2026]}
 
 % ============================================
 % ============================================
@@ -137,24 +147,23 @@
 % ABSTRACT (separate page numbering)
 % --------------------------------------------
 
-
 \include{preliminary-pages/abstract}
-
-% Reset to Roman numerals for remaining preliminary pages
-\pagenumbering{roman}
-\setcounter{page}{1}
 
 % --------------------------------------------
 % TITLE PAGE (page i, but number not shown)
 % --------------------------------------------
 
-\include{preliminary-pages/title-page}
+% Reset to Roman numerals for remaining preliminary pages
+\pagenumbering{roman}
+\setcounter{page}{1}
 
-\setcounter{page}{2}
+\include{preliminary-pages/title-page}
 
 % --------------------------------------------
 % COPYRIGHT PAGE (optional - page ii)
 % --------------------------------------------
+
+\setcounter{page}{2}
 
 \include{preliminary-pages/copyright-page}
 
@@ -170,8 +179,8 @@
 
 \include{preliminary-pages/acknowledgements}
 
-% -------------------------------------------\textit{}-
-% TABLE OF CONTENTS (page v)
+% --------------------------------------------
+% TABLE OF CONTENTS
 % --------------------------------------------
 
 \thispagestyle{plain}
@@ -182,7 +191,7 @@
 \clearpage
 
 % --------------------------------------------
-% LIST OF FIGURES (page vi)
+% LIST OF FIGURES 
 % --------------------------------------------
 
 \thispagestyle{plain}
@@ -198,7 +207,7 @@
 \clearpage
 
 % --------------------------------------------
-% LIST OF TABLES (page vii)
+% LIST OF TABLES 
 % --------------------------------------------
 
 \thispagestyle{plain}
@@ -219,59 +228,51 @@
 \pagenumbering{arabic}
 \setcounter{page}{1}
 
+\setlength{\parindent}{1.5em}  % indentation on paragraphs
+\setlength{\parskip}{0.5em}    % removes extra space between paragraphs
+
 % ALL of the text in this thesis is in the respective .tex documents. This will make writing easier, not having to mess with the main.tex while writing. -Ali
 \include{1-introduction}
+
 \include{2-background}
+
 \include{3-methods}
+
 \include{4-literature}
+
 \include{5-results}
+
 \include{6-conclusions}
+
+\clearpage
 
 % --------------------------------------------
 % SUPPLEMENTAL MATERIAL
 % --------------------------------------------
 
-\chapter{Supplemental Material}
-
-This section contains the complete results of the experiments conducted.
-Utilize sections to organize the supplemental content and reduce clutter in the main chapters.
-
-\section{CeO2 Parameterization}
-
-For example, the results from work on CeO2 parameterization.
+\include{supplementary/S-supplemental.tex}
 
 \clearpage
 
 % ============================================
 % APPENDICES
 % ============================================
-
 % Single spacing for appendices
 \singlespacing
 
 \begin{appendices}
- 
-\chapter{Additional Information on a relevant topic}
-
-The additional information section provides further details, such as theory that was too long for the main text. This is to expand the reader's understanding without disrupting the flow of the main chapters.
-
-\clearpage
-
-\chapter{Even more information on another topic}
-
-Another appendix for more information.
-
+    \input{supplementary/A-appendix.tex}
+    \input{supplementary/B-appendix.tex}
 \end{appendices}
-
 \clearpage
 
 % ============================================
 % Glossary
 % ============================================
 
-\printglossary[title={Glossary}, toctitle={Glossary},nonumberlist]
+\printglossary[title={Glossary},toctitle={Glossary},type=\acronymtype ,nonumberlist]\label{glossary} % acronyms only
 
-% need to add a symbols list for variables and math ******
+\printglossary[title={Math Symbols},type=symbols,nonumberlist]
 
 \clearpage
 

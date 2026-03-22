@@ -1,22 +1,35 @@
 % --------------------------------------------
 % CHAPTER 5: RESULTS AND DISCUSSION
 % --------------------------------------------
-\setlength{\parindent}{0.5in}
 
 \chapter{Results and Discussion}
-Put a flowchart of the workflow from atomistic to boltzmann somewhere in here, or maybe in methods????
 
+Start with an overview of my general results, covering topics from UO2 hubbard, Phonopy UO2/Xe/CeO2, work in DFTB+ with GFN1-xTB and GFN2-xTB, attempted parameterization of CeO2 using dxTB and tblite, and most recently my work in using Green Kubo to calculate heat capacity and thermal conductivity and other thermal properties using Phonopy outputs and discretization in space. 
+
+This section is for stating results, including taking note of challenges and failures along the way. Lots of figures here, but don't be afraid to toss figures into supplementary if they don't fit.
 
 \section{Results}
-The data, math values, and findings.
 
+\subsection{Software Benchmarking}
+
+Here I put my initial works in the lab, simulating UO2 compared to Laura's papers and doing phonon calculations. 
+
+Show work on Hubbard U, including the project from Molecular Modeling to calculate a Hubbard U based on the carbogno paper (make sure to discuss carbogno in an appendix). 
+
+Initial work on CeO2 simulation, on DFTB+ and the issues we found with that. Show xTB plots to demonstrate what worked and what didn't. Mention contact with xTB developers and the new code that is supposedly parameterized for actinides, which will allow future work to use xTB for UO2 and CeO2.
+
+\subsection{Thermal Property Prediction}
+
+Plots from my work predicting thermal properties. Start with silicon, then move to UO2, CeO2, Xe, and mixed structures (if I can get these calculations done in time)
 
 \subsection{Analysis}
-How did I decide whether it was good?
 
+How did I decide whether my results were good? Comparison of plots during benchmarking, using VASP as the gold standard for results. Comparing shape but not values to experimental results to check that my work is physical without getting stuck on numbers. VASP has known issues with PBE undershooting the values, so we are more interested in the shape of the graph.
+
+Use uncertainty paper to discuss the uncertainty of VASP vs DFTB+ vs xTB, incorporate propagated uncertainty from Hubbard U and pseudopotentials, and how that uncertainty looks when looking at thermal conductivity calculations.
 
 \section{Discussion}
-What was found?
 
+Discuss major setbacks and findings, lead into the conclusion where we discuss conclusions drawn from the results.
 
 \clearpage

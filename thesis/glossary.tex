@@ -1,57 +1,119 @@
-% this contains all of the terms and acronyms to be located in the glossary
-% for terms: call via \gls{term} or \Gls{term} or \Glspl{term}, create via \newglossaryentry{term}{name=term, description={}}
+% ============================================================
+% Glossary: Terms, Acronyms, and Symbols
+% ============================================================
+% Terms:    \gls{label}, \Gls{label}, \glspl{label}
+%           defined via \newglossaryentry{label}{name=..., description=...}
+% Acronyms: \gls{label}  -- expands to "long form (SHORT)" on first use,
+%                           "SHORT" on subsequent uses
+%           defined via \newacronym{label}{SHORT}{long form}
+% Symbols:  \gls{label}
+%           defined via \newglossaryentry{label}{type=symbols, ...}
+%
+% Per-chapter first-use reset: place \glsresetall at the start of each chapter.
+% Print lists:
+%   \printglossary[type=\acronymtype]  % acronyms only
+%   \printglossary[type=symbols]       % math symbols only
+% ============================================================
+
+
+% ----------------------------------------------------------
+% TERMS
+% ----------------------------------------------------------
+
 \newglossaryentry{ab initio}
 {
     name=ab initio,
-    description={Is a Latin term meaning "From the Beginning"}
+    description={Latin term meaning \textit{from the beginning}; in computational
+        physics and chemistry, refers to calculations derived solely from
+        fundamental physical principles, without empirical parameters or
+        experimental fitting}
 }
 
-\newglossaryentry{VASP}
-{
-    name={Vienna \textit{ab initio} Simulation Package (VASP)},
-    description={Is a first principles code that uses density functional theory.},
-    first={Vienna \textit{ab initio} Simulation Package (VASP)},
-    long={Vienna \textit{ab initio} Simulation Package}
-}
+
+% ----------------------------------------------------------
+% ACRONYMS
+% ----------------------------------------------------------
+
+\newacronym{afq}{AFQ}{accelerated fuel qualification}
+
+\newacronym{aimd}{AIMD}{ab initio molecular dynamics}
+
+\newacronym{dft}{DFT}{density functional theory}
+
+\newacronym{ml}{ML}{machine learning}
+
+\newacronym{mmuq}{MMUQ}{mechanistic multiscale uncertainty quantification}
+
+\newacronym{ms}{M\&S}{modeling and simulation}
+
+\newacronym{pirt}{PIRT}{phenomena identification and ranking table}
+
+% Note: UN = uranium nitride in the nuclear fuels context throughout this thesis.
+\newacronym{un}{UN}{uranium nitride}
+
+\newacronym{uq}{UQ}{uncertainty quantification}
+
+\newacronym{vasp}{VASP}{Vienna \textit{ab initio} simulation package}
+
+
+% ----------------------------------------------------------
+% SYMBOLS
+% ----------------------------------------------------------
 
 \newglossaryentry{kappa}
 {
+    type=symbols,
     name=$\boldsymbol{\kappa}$,
-    description={Symbol for thermal conductivity, lowercase Greek kappa}
+    description={Thermal conductivity [W\,m$^{-1}$\,K$^{-1}$]},
+    sort=kappa
 }
 
 \newglossaryentry{heat flux}
 {
+    type=symbols,
     name=$\boldsymbol{J}$,
-    description={Symbol for heat flux}
+    description={Heat flux vector [W\,m$^{-2}$]},
+    sort=J
 }
 
 \newglossaryentry{gradient}
 {
+    type=symbols,
     name=$\nabla$,
-    description={Symbol for gradient operator, Greek nabla}
+    description={Gradient operator [m$^{-1}$]},
+    sort=nabla
 }
 
 \newglossaryentry{temperature}
 {
+    type=symbols,
     name=$T$,
-    description={Symbol for temperature}
+    description={Temperature [K]},
+    sort=T
 }
 
 \newglossaryentry{pressure}
 {
+    type=symbols,
     name=$p$,
-    description={Symbol for pressure [unit MPa]}
+    description={Pressure [MPa]},
+    sort=p
 }
 
 \newglossaryentry{specific heat capacity}
 {
-    name=$c$,
-    description={Symbol for specific heat capacity, the amount of heat energy needed to raise the temperature of a mass unit of a substance [unit J kg$^-1$ K$^-1$]}
+    type=symbols,
+    name=$c_p$,
+    description={Specific heat capacity; thermal energy required to raise the
+        temperature of a unit mass by one kelvin
+        [J\,kg$^{-1}$\,K$^{-1}$]},
+    sort=cp
 }
 
 \newglossaryentry{stress}
 {
+    type=symbols,
     name=$\boldsymbol{S}$,
-    description={Symbol for stress of a system [unit bar, eV $(\r{A}^{3})^{-1}$]}
+    description={Stress tensor [bar;\; eV\,\text{\AA}$^{-3}$]},
+    sort=S
 }
