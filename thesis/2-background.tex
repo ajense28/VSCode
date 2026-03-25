@@ -23,145 +23,21 @@ Reciprocal lattices are defined with reference to a particular Bravais lattice.
  The Wigner-Seitz primitive cell of the reciprocal lattice is called the first Brillouin zone (BZ). Many of the calculations in this work involve integrating periodic functions of a Block wave vector over specified portions of the BZ. Monkhorst-Pack developed a method for finding "special" points to integrate over within the BZ in order to optimize calculations \autocite{monkhorstSpecialPointsBrillouinzone1976}. These "special" points are known as k-points. A high-symmetry path is then defined between these k-points, called the k-path. 
 
 % ============================================================
-\section{Quantum Mechanical (QM) Foundation}
+\section{Quantum Mechanics Basics}
 % ============================================================
 
 Quantum mechanics is a famously difficult subject, so this section will attempt to introduce the bare minimum concepts needed to support the Chapter \ref{chap:methods} methods overview. 
 
-We start with electrons, fundamental subatomic particles with a small mass and a negative electrical charge equal to $1.062 \times 10^{-19}$ Coulomb. Electrons occupy electronic orbitals outside the nucleus of an atom. These orbitals define regions in which electrons have the highest probability of being found. This concept of probability in relation to subatomic particles will be discussed later. There are two general categories of electrons, core electrons that occupy the lowest energy levels, and valence electrons, which occupy the outermost shell and have the highest energy levels. Valence electrons primarily determine the reactivity of the atom and engage in chemical bonding. When all of a system's electrons occupy the lowest available energy levels, the atom is said to be in its ground state. The ground state is especially important in chemistry, since it is used to predict the crystal's reactivity, binding capabilities, and other properties.
+We start with electrons, fundamental subatomic particles with a small mass and a negative electrical charge equal to $1.062 \times 10^{-19}$ Coulomb. The number of electrons in an atom is typically equal to the number of protons (positive subatomic particles that determine the type of atom), but when this number is not equal, the atom is called an ion. Electrons occupy electronic orbitals outside the nucleus of an atom. These orbitals define regions in which electrons have the highest probability of being found. This concept of probability in relation to subatomic particles will be discussed later. There are two general categories of electrons, core electrons that occupy the lowest energy levels, and valence electrons, which occupy the outermost shell and have the highest energy levels. Valence electrons primarily determine the reactivity of the atom and engage in chemical bonding. When all of a system's electrons occupy the lowest available energy levels, the atom is said to be in its ground state. The ground state is especially important in chemistry, since it is used to predict the crystal's reactivity, binding capabilities, and other properties. When the atom is not it's ground state, it is said to be in an excited state.
 
-Phonons are a particle representation of vibrations in a lattice. Though not physical particles in reality, they can collide and interact with other particles, and play a large role in how kinetic energy moves through a crystal lattice. 
+Phonons are quasi-particle representations of vibrational energy in a solid material. Though not physical particles in reality, they can collide and interact with other particles, and play a large role in how kinetic energy moves through a crystal lattice. Phonons are divided into two modes, acoustic and optical modes. Acoustic mode phonons are in phase, meaning that they move together in the same direction. They vanish at the (0,0,0) k-point, and correspond to sound waves propagating through the lattice. Optical mode phonons are out of phase, meaning that positive and negative ions move in opposite directions. The optical phonons are related to electromagnetic radiation. Both types contribute to heat transport an electron scattering within the lattice.
+In order to properly discuss phonons, we must mention the harmonic approximation, and the effects of anharmonicity.
+Thermal properties such as heat capacity, entropy, and thermal conductivity can be predicted using phonon calculations.
 
 Define phonons, and introduce their connection to thermal conductivity (as a mention not explanation)
 quantized vibrations in the form of phonons
-Harmonic, anharmonic, 
-optical, acoustic
-phonon modes
+Harmonic, anharmonic
 
-% What is a band structure? What makes a band structure diagram useful? These are crucial outputs for my dft calculations. Mention fermi energy, band gap...
-% How is band structure used to quantify and display electron and phonon results?
-
-% What is the density of states? How is it useful? How is it related to the 3D density of states generated by Dr. Alex
-
-
-
-
-% ============================================================
-\section{Density Functional Theory}
-% ============================================================
-% great mathematical explanation of dft: https://www.theoretical-physics.com/dev/quantum/dft.html
-% another good explanation: https://rashid-phy.github.io/me/resources/DFT/An_Introduction_to_DFT.pdf
-
-Many Body Schrödinger
-The Hohenberg-Kohn Theorems:
-Kohn-Sham
-XC term (PBE)
-PAW potentials
-
-\autocite{schrodingerQuantisierungAlsEigenwertproblem1926}
-% → Extract: cite as origin of the wave equation; do not 
-%   derive. Point reader to appendix for full treatment.
-%   [APPENDIX: full Schrödinger equation derivation/discussion]
-\autocite{ashcroftSolidStatePhysics1976}
-% → Extract: Ch. 2. Born-Oppenheimer approximation — 
-%   decoupling of nuclear and electronic degrees of freedom. 
-%   physical justification for treating electrons and phonons separately
-
-\autocite{hohenbergInhomogeneousElectronGas1964}
-% → Extract: Both theorems verbatim (in your own words): 
-%   (1) ground-state energy is a unique functional of 
-%   electron density; (2) variational principle. 
-%   These justify replacing the wavefunction with density.
-
-The Kohn-Sham Equations
-
-\autocite{kohnSelfConsistentEquationsIncluding1965}
-% → Extract: Mapping of interacting system onto 
-%   non-interacting system of same density; self-consistent 
-%   field (SCF) loop concept; introduce exchange-correlation 
-%   term as the unknown requiring approximation.
-\autocite{ashcroftSolidStatePhysics1976}
-% → Extract: Ch. 3. Supporting discussion of 
-%   single-electron approximation and effective potential.
-
-Exchange-Correlation Functionals
-
-Pg 332 of Ashcroft
-% You PBE 
-% (GGA) as your default and DFT+U for correlated systems — 
-% both need theoretical grounding here.
-% No direct citation in your bib for PBE (Perdew 1996) — 
-% consider adding it. For DFT+U:
-\autocite{anisimovBandTheoryMott1991}
-% → Extract: Physical motivation for Hubbard U correction; 
-%   why LDA/GGA fails for correlated d/f-electron systems 
-%   like UO2. Keep brief; full U parameterization 
-%   discussion [APPENDIX] or methods.
-\autocite{teschHubbardParametersTransition2022}
-% → Extract: First-principles determination of U — 
-%   cite as the source of your U values in methods; 
-%   here just introduce that U must be determined.
-
-\subsection{Plane Waves, Pseudopotentials, and PAW}
-This can be very very brief or included into a previous section.
-% The plane-wave basis and PAW method are assumed by 
-% all VASP calculations and need a brief theoretical 
-% introduction before methods.
-\autocite{kresseUltrasoftPseudopotentialsProjector1999}
-% → Extract: PAW method concept — all-electron accuracy 
-%   with pseudopotential efficiency; frozen-core 
-%   approximation. One paragraph is sufficient.
-\autocite{kresseInitioMolecularDynamics1993}
-\autocite{kresseInitioMolecularDynamics1994}
-\autocite{kresseEfficiencyAbinitioTotal1996}
-% → Extract (collectively): Cite as the VASP implementation 
-%   papers; pull only the theoretical content describing 
-%   iterative diagonalization and electronic minimization 
-%   that you flag in your current outline. 
-%   Implementation detail belongs in methods.
-
-\subsection{Density Functional Tight Binding (DFTB)}
-\autocite{elstnerSelfconsistentchargeDensityfunctionalTightbinding1998}
-% → Extract: SCC-DFTB as a 2nd-order expansion of the 
-%   DFT total energy in density fluctuations; physical 
-%   approximations made relative to full DFT; 
-%   Slater-Koster parametrization concept.
-\autocite{hourahine2020dftb}
-% → Extract: Overview of DFTB+ capabilities — cite here 
-%   for scope; implementation details go in methods.
-
-\subsection{Extended Tight Binding (xTB)}
-\autocite{grimmeRobustEfficientGeneral2017}
-% → Extract: GFN1-xTB — semiempirical parametrization 
-%   strategy, what physical terms are retained vs 
-%   approximated relative to DFTB.
-\autocite{bannwarthGFN2xTBAnAccurateBroadly2019}
-% → Extract: GFN2-xTB improvements — multipole 
-%   electrostatics, D4 dispersion; accuracy vs cost 
-%   tradeoff that motivates your use of xTB for 
-%   large-scale or exploratory calculations.
-\autocite{bannwarthExtendedTightbindingQuantum2021}
-% → Extract: Use as the primary review reference for 
-%   the xTB family; pull the benchmarking discussion 
-%   that justifies accuracy for your material class.
-
-% ============================================================
-\section{Lattice Dynamics and Phonons}
-% ============================================================
-% PURPOSE: Now that the electronic structure is established, 
-% introduce nuclear motion. This section feeds directly into 
-% thermodynamic properties and thermal transport.
-
-\subsection{Harmonic Approximation and Force Constants}
-% ---- MISSING TOPIC NOTE ----
-% Your current outline mentions harmonic/anharmonic but 
-% does not introduce interatomic force constants (IFCs) — 
-% the bridge between DFT forces and phonon calculations. 
-% This is essential; Phonopy is built entirely on IFCs.
-\autocite{ashcroftSolidStatePhysics1976}
-% → Extract: Ch. 22-23. Taylor expansion of potential 
-%   energy surface; harmonic approximation; dynamical 
-%   matrix definition.
 \autocite{togoFirstprinciplesPhononCalculations2023}
 % → Extract: Supercell finite-displacement method for 
 %   IFC extraction from DFT forces. This is the 
@@ -170,54 +46,17 @@ This can be very very brief or included into a previous section.
 % → Extract: Symmetry reduction of IFC calculations; 
 %   cite for completeness alongside above.
 
-\subsection{Phonon Dispersion and Density of States}
-% Connects to your existing Band Structure and DOS 
-% subsections — merge or cross-reference as appropriate.
-\autocite{ashcroftSolidStatePhysics1976}
-% → Extract: Acoustic vs optical branch character; 
-%   group velocity definition — needed later for 
-%   thermal conductivity discussion.
-\autocite{togoFirstprinciplesPhononCalculations2023}
-% → Extract: Phonon DOS calculation via tetrahedron 
-%   method; q-point mesh convergence.
-
-\subsection{Anharmonicity and Phonon Lifetimes}
-% ---- MISSING TOPIC NOTE ----
-% Anharmonicity is central to thermal transport in UO2 
-% and is currently only mentioned in passing. It needs 
-% its own subsection connecting IFCs to scattering.
-\autocite{togoDistributionsPhononLifetimes2015}
-% → Extract: 3rd-order IFCs; phonon-phonon scattering 
-%   rates via Fermi's golden rule; this is the 
-%   theoretical core of Phono3py and your BTE work.
-\autocite{ashcroftSolidStatePhysics1976}
-% → Extract: Ch. 25. Umklapp vs normal scattering 
-%   processes — physical interpretation of phonon 
-%   lifetime limits.
+% What is a band structure? What makes a band structure diagram useful? These are crucial outputs for my dft calculations. Mention fermi energy, band gap...
+% How is band structure used to quantify and display electron and phonon results?
+% What is the density of states? How is it useful? How is it related to the 3D density of states generated by Dr. Alex
 
 % ============================================================
-\section{Thermodynamic Properties}
+\section{Thermodynamic Formulation}
 % ============================================================
-% PURPOSE: Connect phonon spectrum to macroscopic 
-% thermodynamic observables. Relatively short section.
-Lead in from phonons and connect to thermodynamics, why do I care about phonons and not electrons in my work?
 
-\subsection{Heat Capacity}
-The isochoric specific heat capacity (\gls{specific heat capacity}) is defined as the amount of heat that must be supplied to a mass unit of a substance at constant volume to raise its temperature by some amount. In general, the heat capacity of a substance under a temperature differential ($dT$) with some mass ($m$) and supplied heat ($dQ$) can be shown as:
-\begin{equation}
-    c_v=\frac{dQ}{m\,dT}
-\end{equation}
-In the more specific case of phonon simulation, specific heat capacity can be defined in terms of the phonon frequency ($\omega$)
+At the center of this work is the attempt to predict the thermal properties of inorganic solids using atomic scale calculations. Below is a brief overview of the mathematical foundation for deriving these properties.
 
-\autocite{ashcroftSolidStatePhysics1976}
-% → Extract: Ch. 23. Phonon contribution to heat 
-%   capacity via phonon DOS integral; Einstein and 
-%   Debye model limits as physical intuition; 
-%   general expression in terms of phonon frequency.
-
-\subsection{Fourier's Law and Thermal Conductivity}
-% Your current content (Fourier's law equation) fits here.
-% No new citations needed; this is definitional.
+\subsection{Fourier's Law}
 
 According to the 0th law of thermodynamics, any temperature gradient ($\nabla T$)\glsadd{gradient}\glsadd{temperature} will spontaneously induce a heat flux \gls{heat flux} to return the system to thermodynamic equilibrium.
 
@@ -227,32 +66,18 @@ Fourier's Law describes the relationship between the heat flux \gls{heat flux} a
     \boldsymbol{J} = -\boldsymbol{\kappa}(T,p)\cdot \nabla T
 \end{equation}
 
-% ============================================================
-\section{Thermal Transport Theory}
-% ============================================================
-% PURPOSE: The theoretical core of your computational 
-% methods for thermal conductivity. Two parallel approaches 
-% (BTE and Green-Kubo) should both appear here.
+\subsection{Heat Capacity}
 
-\subsection{Boltzmann Transport Equation}
-% ---- MISSING TOPIC NOTE ----
-% You mention BTE in your thesis title and intro but it 
-% is entirely absent from the current Ch. 2 outline. 
-% It must appear here as the theoretical basis for 
-% phonon transport and the Harter/Palmer mesoscale work.
-\autocite{ashcroftSolidStatePhysics1976}
-% → Extract: Ch. 13. BTE derivation for phonons; 
-%   relaxation time approximation (RTA); 
-%   connection to thermal conductivity tensor.
-\autocite{harterPredictingMesoscaleSpectral2020}
-% → Extract: Deterministic phonon transport formulation 
-%   as the mesoscale method your work connects to; 
-%   pull the BTE form used in Rattlesnake.
-\autocite{harterCharacterizationThermalConductivity2015}
-% → Extract: Supporting reference for spectral 
-%   decomposition of thermal conductivity.
+The isochoric specific heat capacity (\gls{specific heat capacity}) is defined as the amount of heat that must be supplied to a mass unit of a substance at constant volume to raise its temperature by some amount. In general, the heat capacity of a substance under a temperature differential ($dT$) with some mass ($m$) and supplied heat ($dQ$) can be shown as:
+\begin{equation}
+    c_v=\frac{dQ}{m\,dT}
+\end{equation}
+In the more specific case of phonon simulation, specific heat capacity can be defined in terms of the phonon frequency ($\omega$)
+
+\autocite{ashcroftSolidStatePhysics1976} % ch 23 phonon contribution to heat capacity (this is where I pulled my eq)
 
 \subsection{Green-Kubo Theory}
+
 The paper Carbogno et al \autocite{carbognoInitioGreenKuboApproach2017} presents a method for the first-principles formulation of the Green-Kubo method for phonon thermal conductivity of solids in equilibrium. 
 
 The Green-Kubo formula for heat flux developed for LAMMPS using the stress (\gls{stress}) of a system of $i$ atoms \autocite{surblysApplicationAtomicStress2019}.
@@ -262,32 +87,21 @@ The Green-Kubo formula for heat flux developed for LAMMPS using the stress (\gls
 \end{equation}
 Which sums the convective flux $J_\text{conv}=E_i \cdot \vec{v}_i$ and the conductive flux $J_\text{cond}=-\boldsymbol{S} \cdot\vec{v}_i$.
 
-\autocite{carbognoInitioGreenKuboApproach2017}
-% → Extract: First-principles GK for solids; 
-%   heat flux autocorrelation function (HFACF) 
-%   definition; connection between HFACF and kappa.
-\autocite{knoopInitioGreenKuboSimulations2023}
-% → Extract: Practical implementation of aiGK — 
-%   finite-size and finite-time convergence; 
-%   cite here for theoretical completeness, 
-%   numerical details go in methods.
-\autocite{surblysApplicationAtomicStress2019}
-% → Extract: Atomic stress formulation of heat flux 
-%   for many-body potentials — theoretical basis 
-%   for your LAMMPS heat flux expression (Eq. already 
-%   in your draft). Pull the derivation logic.
-\autocite{surblysMethodologyMeaningComputing2021}
-% → Extract: Extension to constraint dynamics; 
-%   cite alongside above for completeness.
-\autocite{zhangGreenKuboFormalismThermal2023}
-% → Extract: GK heat flux for Slater-Koster TB — 
-%   theoretical bridge between your DFTB+ calculations 
-%   and GK thermal conductivity. Important for 
-%   justifying the DFTB+/GK combination in your work.
-\autocite{poulosExactFormulaSpectral2026}
-% → Extract: Exact many-body heat flux formula and 
-%   spectral decomposition — use to support the 
-%   theoretical rigor of your heat flux formulation 
-%   and introduce spectral kappa if you use it.
+%Still need to discuss heat flux autocorrelation function (HFACF) from Carbogno
+
+\autocite{knoopInitioGreenKuboSimulations2023} % green kubo simulation in action, this could also go in lit review
+
+\autocite{surblysApplicationAtomicStress2019} % this is the LAMMPS heat-flux equation paper, gives a look into atomic stress formulation
+\autocite{surblysMethodologyMeaningComputing2021} % the other LAMMPS heat-flux paper that has the other stress form
+
+\autocite{zhangGreenKuboFormalismThermal2023} % this is part of the future work but might be useful to show for completeness
+
+\subsection{Boltzmann Transport Equation}
+
+What is BTE, and how does it connect to smaller scale mathematical formulas?
+\autocite{ashcroftSolidStatePhysics1976} % ch 13 BTE for phonons, thermal conductivity
+\autocite{harterPredictingMesoscaleSpectral2020} % this is basically the foundational paper for my results, need to pull from their derivations
+Maybe use the Rattlesnake formulas here? I don't want to get that deep into it.
+\autocite{harterCharacterizationThermalConductivity2015} % another jackson paper if I need it
 
 \clearpage

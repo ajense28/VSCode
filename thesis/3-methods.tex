@@ -4,25 +4,43 @@
 
 \chapter{Computational Methods}\label{chap:methods}
 
+In this chapter, we explain the methods and computational tools used throughout this work. Continuing the discussion from the previous chapter, there is a limited discussion of the mathematical theory that defines each software. In this work, we experimented with many codes, and were able to find which were adequate for the desired calculations, and which codes are candidates for future work. Here, we discuss 
 
-NEED TO DEFINE MECHANISTIC MODELING HERE : WHAT IS IT? **
+To simulate thermal properties and generate parameters for large scale calculations, this work utilizes a variety of nanoscale codes. Over the course of this research, we have developed a workflow for calculating these parameters and verifying the results, shown in figure REF.
 
-To do X, we utilize A, B, and C for various tasks, and attempt to combine these results into a cohesive picture using UQ. ***
+**** Workflow flowchart here !!!
 
-How were the results produced? This demonstrates an understanding of the tools used and why each tool was used. What results were gotten from each?
+This work has also demonstrated gaps in the available parameterizations for certain codes, limiting the number of elements that can be successfully modelled at this time. Further discussion of the parameterization limitation and how we tried to solve it can be found in Appendix B (\ref{apx:B}).
 
-VASP, PHONOPY, AI-MD (ab initio molecular dynamics), DFTB, LAMMPS, MOOSE, etc etc. How to mention these codes and their relevance in an organized manner? Is it necessary to discuss all of them here? Where do I mention the difference between discrete and probabilistic methods? Do I discuss mathematical methods here?
+At a high level, this work serves as the starting point for a larger multiscale simulation projects spanning multiple disciplines. This planned model is called a mechanistic model, defined as a mathematical representation of dynamic behavior in a process, in this case in the fission gas release within a nuclear fuel environment. This small part of the puzzle aimed to create a workflow that could accurately predict the thermodynamic properties of fuels, fission products, and other materials. We aim to combine the results of this work into a cohesive picture, using uncertainty qualification (UQ) to ensure success.
 
-Some kind of figure to demonstrate the codes used could be useful here.
+% VASP, PHONOPY, AI-MD (ab initio molecular dynamics), DFTB, LAMMPS, MOOSE, etc etc. How to mention these codes and their relevance in an organized manner? Is it necessary to discuss all of them here? Where do I mention the difference between discrete and probabilistic methods? Do I discuss mathematical methods here?
 
-Good idea to recommend other sources for further reading, since I'll only cover the broad strokes here. 
+% ============================================================
+\section{\textit{ab initio} Methods}
+% ============================================================
+% great mathematical explanation of dft: https://www.theoretical-physics.com/dev/quantum/dft.html
+% another good explanation: https://rashid-phy.github.io/me/resources/DFT/An_Introduction_to_DFT.pdf
 
-This is a computational work, with some emphasis on math theory and derivation and physics. I might rename this to just methods, and have the math be in here too, if that is reasonable.
+The phrase \textit{ab initio} is Latin for "from the beginning", meaning codes that use the fundamental laws of physics to solve the Schrödinger equation, with no input from experimental parameters. 
 
-\section{Density Functional Theory}
-https://vasp.at/wiki/Category:Theory
-Covering the main concepts that are required to understand my results and where my data comes from.
-\autocite{kresseEfficiencyAbinitioTotal1996} (VASP source with explanation of their tools and methods- use for explaining theory)
+\subsection{Vienna \textit{ab initio} Simulation Package (VASP)}
+
+The primary code used in this work was the Vienna \textit{ab initio} Simulation Package (VASP), a first-principles deterministic sofware based on density functional theory (dft). It has a well-defined precision, with many published works on hybridized functionals aimed to increase the accuracy of simulation. This is a licensed software, with extensive documentation and an active community of users in academic spaces. 
+
+\subsubsection{Density Functional Theory}
+
+Density functional theory uses an electron density approximation to solve the many-body Schrödinger equation. Here we briefly cover the derivation of this method.
+
+Many Body Schrödinger
+\autocite{schrodingerQuantisierungAlsEigenwertproblem1926} % cite for wave equation, no derivations here
+\autocite{ashcroftSolidStatePhysics1976} % Ch. 2. Born-Oppenheimer approximation for treating electrons and phonons separate
+
+The Hohenberg-Kohn Theorems:
+\autocite{hohenbergInhomogeneousElectronGas1964} % theorems, explain and note ground-state energy and variational principle and the density method
+
+Kohn-Sham
+\autocite{kohnSelfConsistentEquationsIncluding1965} % non-interacting system, SCF, xc as a needed concept
 
 Hohenberg-Kohn-Sham density functional theory yields a formula for the ground state as a function of the electronic density $\rho(\boldsymbol{r})$:
 \begin{equation}\label{HKS-functional}
@@ -35,19 +53,46 @@ Where the electronic density for n electrons in the system is given as:
 \autocite{kresseEfficiencyAbinitioTotal1996}
 % FROM VASP ELECTRONIC MINIMIZATION SITE https://www.vasp.at/wiki/Category:Electronic_minimization
 
+XC term (PBE)
+\autocite{perdewGeneralizedGradientApproximation1996} % I use PBE, LDA+U, occasional GGA
 
-\subsection {Hubbard U}
-Here is where all my work on the hubbard U parameter gets to shine.
+PAW potentials
+\autocite{kresseUltrasoftPseudopotentialsProjector1999} % PAW concept, pseudopotentials for efficiency, frozen-core approx
 
-\autocite{anisimovBandTheoryMott1991} 'First' Hubbard U paper - proposes the theory
-
-\autocite{teschHubbardParametersTransition2022} Hubbard from first principles paper
-
-\subsection {Phonon Calculations}
-The tools Phonopy and Phono3py \autocite{togoFirstprinciplesPhononCalculations2023} were essential for computing the phonon vibrational modes for this study. This is a separate software that interfaces with VASP and DFTB+ to provide a comprehensive toolkit for simulating phonons. 
+MENTION Hubbard U but discuss at length in the appendix \ref{apx:A}
+\autocite{anisimovBandTheoryMott1991} % motivation for Hubbard U - high correlated d and f orbitals, ie UO2 and CeO2
+\autocite{teschHubbardParametersTransition2022} % U must be determined by experiment or iteratuve calculation
 
 
-\section{Density Functional Tight Binding}
-DFTB-SCC, xTB, how do I use extended tight binding, and the concepts behind it.
+\subsection{Phonopy and Phono3py}
+
+The codes used for phonon simulation in this work are Phonopy and Phono3py. These packages use other codes as auxiliary tools to generate the necessary force constants, and so they were used with both VASP and the semi-empirical tools discussed later. As discussed in the previous chapter, our goal was to imitate the Phonopy calculations of thermal properties using a space-discretized method based on Green-Kubo theory.
+ 
+\autocite{ashcroftSolidStatePhysics1976} % Ch. 22-23. Taylor expansion of potential energy surface, harmonic approx, dynamical matrix
+\autocite{togoFirstprinciplesPhononCalculations2023} % supercell finite-displacement method (the phonopy method), this is the main phonopy reference paper. Leave the actual workflow for the methods, tetrahedron method, mesh convergence
+Phono3py math concepts introduced here or later???
+\autocite{togoDistributionsPhononLifetimes2015} % phono3py concepts, 3rd order forces, phonon-phonon scattering
+
+% ============================================================
+\section{Semi-empirical Methods}
+% ============================================================
+
+Due to the computationally expensive nature of \textit{ab initio} methods, it is prudent to simplify the theory further, allowing for longer time-scale calculations with more atoms. Semi-empirical methods use a combination of approximations and empirical data (hence semi-empirical) in order to reduce the computational cost of large simulations. In this work, we used two semi-empirical codes in tandem, the Density Functional Tight-Binding (DFT+) and  Geometry, Frequency, and Noncovalent interactions - extended Tight Binding (GFN-xTB) methods\autocite{hourahine2020dftb,grimmeRobustEfficientGeneral2017}.
+
+\subsection{Density Functional Tight-Binding Method}
+
+Discuss what tight-binding is and how empirical tools are used (Slater-Koster)
+
+\autocite{elstnerSelfconsistentchargeDensityfunctionalTightbinding1998} % SCC-DFTB is a 2nd order expansion of DFT total energy. Approximation. Concept of Slater-Koster
+\autocite{hourahine2020dftb} % this is the DFTB+ paper, mention but save for methods
+
+\subsection{Extended Tight-Binding Method}
+
+Because of the lack of S-K for lanthanides, we were motivated to find another method for simulating larger systems at a reasonable computational cost. Enter GFN-xTB.
+\autocite{grimmeRobustEfficientGeneral2017} % GFN1-xTB paper, semiemperical parameterization
+\autocite{bannwarthGFN2xTBAnAccurateBroadly2019} % GFN2-xTB paper, accuracy vs cost for larger calcs
+\autocite{bannwarthExtendedTightbindingQuantum2021} % xTB primary review and reference for accuracy of approximation
+
+Close with a paragraph that leads into the results.
 
 \clearpage
